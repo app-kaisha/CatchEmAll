@@ -12,7 +12,7 @@ import SwiftUI
 struct CatchEmAllApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CreaturesListView()
         }
     }
 }
