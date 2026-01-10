@@ -16,8 +16,12 @@ struct CreaturesListView: View {
         NavigationStack {
             Text("Come back and fix later")
             List(creatures.creaturesArray, id: \.self) { creature in
-                Text(creature.name)
-                    .font(.title2)
+                NavigationLink {
+                    DetailView(creature: creature)
+                } label: {
+                    Text(creature.name.capitalized)
+                        .font(.title2)
+                }
             }
             .listStyle(.plain)
             .navigationTitle("Pokemon")
