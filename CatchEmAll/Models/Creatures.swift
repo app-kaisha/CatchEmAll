@@ -15,7 +15,7 @@ class Creatures {
     
     private struct Returned: Codable {
         var count: Int
-        var next: String // TODO: change to optional
+        var next: String?
         var results: [Creature]
     }
     
@@ -25,7 +25,7 @@ class Creatures {
     
     func getData() async {
         
-        print("🕸️ We are accessing the url \(urlString)")
+        //print("🕸️ We are accessing the url \(urlString)")
         
         // Create URL
         guard let url = URL(string: urlString) else {
@@ -45,10 +45,12 @@ class Creatures {
             
             // Confirm data was decoded:
             // print("😎 JSON returned! count: \(returned.count), next: \(returned.next)")
-            
-            self.count = returned.count
-            self.urlString = returned.next
-            self.creaturesArray = returned.results
+            Task { @MainActor in
+                self.count = returned.count
+                self.urlString = returned.next ?? ""
+                self.creaturesArray = self.creaturesArray + returned.results
+            }
+
             
         } catch {
             print("😡 ERROR: Could not get data from \(urlString)")

@@ -28,7 +28,7 @@ class CreatureDetail {
     
     func getData() async {
         
-        print("🕸️ We are accessing the url \(urlString)")
+        //print("🕸️ We are accessing the url \(urlString)")
         
         // Create URL
         guard let url = URL(string: urlString) else {
