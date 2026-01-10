@@ -62,4 +62,17 @@ class Creatures {
         }
     }
     
+    func loadAll() async {
+        Task { @MainActor in
+            
+            // guard for last page reached
+            guard urlString.hasPrefix("http") else { return }
+            
+            await getData()
+            // recurssion - call self until all data retrieved
+            await loadAll()
+        }
+        
+    }
+    
 }
