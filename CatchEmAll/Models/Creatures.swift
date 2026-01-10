@@ -62,6 +62,13 @@ class Creatures {
         }
     }
     
+    func loadNextIfNeeded(creature: Creature) async {
+        guard let lastCreature = creaturesArray.last else { return }
+        if creature.id == lastCreature.id && urlString.hasPrefix("http") {
+            await getData()
+        }
+    }
+    
     func loadAll() async {
         Task { @MainActor in
             
